@@ -1,0 +1,35 @@
+nav{
+    background-color: #0ab8f7 ;
+    font-size: 22px;
+    font-weight: bold;
+}
+.cart{
+    width:50px;
+    height: 50px;
+    margin-left: 20px;
+}
+
+body{
+    background-color: #9ac5f6;
+}
+.hero{
+    padding-top: 290px;
+    padding-bottom: 300px;
+    background-image: url(../img/b1.jpg) ;
+    background-size: cover;
+    background-position: center;
+    color:rgb(72, 72, 207);
+}
+.hero div h1{
+    font-size: 100px;
+}
+.hero div p{
+    font-size: 30px;
+    font-weight: bold;
+}
+.hero a{
+    padding: 15px;
+    padding-left: 20px;
+    font-weight: bold;
+    font-size: 30px;
+}

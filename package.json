@@ -1,0 +1,19 @@
+{
+  "name": "codealpha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robson120-s/CodeAlpha_E-CommerceStore.git"
+  },
+  "author": "Robson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robson120-s/CodeAlpha_E-CommerceStore/issues"
+  },
+  "homepage": "https://github.com/robson120-s/CodeAlpha_E-CommerceStore#readme"
+}
