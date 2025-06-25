@@ -1,5 +1,5 @@
 nav{
-    background-color: #0ab8f7 ;
+    background-color: #e2e6d5 ;
     font-size: 22px;
     font-weight: bold;
 }
@@ -10,12 +10,12 @@ nav{
 }
 
 body{
-    background-color: #9ac5f6;
+    background-color: #73ebc9;
 }
 .hero{
     padding-top: 290px;
     padding-bottom: 300px;
-    background-image: url(../img/b1.jpg) ;
+    background-image: url(../img/ChatGPT\ Image.png) ;
     background-size: cover;
     background-position: center;
     color:rgb(72, 72, 207);
@@ -32,4 +32,10 @@ body{
     padding-left: 20px;
     font-weight: bold;
     font-size: 30px;
+}
+.con-pro{
+    
+    margin-left: 205px !important;
+    padding-right: 15px !important;
+    
 }
