@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thrift Store | Shop Vintage & Pre-Loved Fashion</title>
+
+    <link rel="shortcut icon" href="img/logo.jpg" type="image/x-icon" />
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      :root {
+        --primary-color: #6c4ab6;
+        --secondary-color: #8d72e1;
+        --accent-color: #b9e0ff;
+        --light-color: #f8f9fa;
+        --dark-color: #212529;
+        --sale-color: #ff6b6b;
+      }
+
+      body {
+        background-color: #d5bd8e;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .shop-header {
+        background: linear-gradient rgba(0, 0, 0, 0.5),
+          url("https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80")
+            center/cover;
+        color: white;
+        padding: 5rem 0;
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+
+      .product-card {
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        margin-bottom: 1.5rem;
+        position: relative;
+        background-color: #ffffff;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-img {
+        height: 250px;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .product-card:hover .product-img {
+        transform: scale(1.03);
+      }
+
+      .badge-sale {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: var(--sale-color);
+        font-size: 0.8rem;
+        padding: 5px 10px;
+      }
+
+      .badge-vintage {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: var(--primary-color);
+        font-size: 0.8rem;
+        padding: 5px 10px;
+      }
+
+      .price {
+        font-weight: 700;
+        color: var(--dark-color);
+      }
+
+      .original-price {
+        text-decoration: line-through;
+        color: #6c757d;
+        font-size: 0.9rem;
+      }
+
+      .sale-price {
+        color: var(--sale-color);
+      }
+
+      .btn-add-to-cart {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-add-to-cart:hover {
+        background-color: var(--secondary-color);
+        transform: translateY(-2px);
+      }
+
+      .btn-quick-view {
+        background-color: white;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 8px 20px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-quick-view:hover {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .filter-section {
+        background-color: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+      }
+
+      .form-check-input:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+
+      .pagination .page-item.active .page-link {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+
+      .pagination .page-link {
+        color: var(--primary-color);
+      }
+
+      .category-badge {
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: var(--accent-color);
+        color: var(--primary-color);
+        border-radius: 20px;
+        font-size: 0.75rem;
+        margin-right: 5px;
+        margin-bottom: 5px;
+      }
+
+      .condition-tag {
+        font-size: 0.8rem;
+        padding: 3px 8px;
+        border-radius: 5px;
+        background-color: #e9ecef;
+        display: inline-block;
+        margin-top: 5px;
+      }
+
+      .condition-excellent {
+        background-color: #d1fae5;
+        color: #065f46;
+      }
+
+      .condition-good {
+        background-color: #fef3c7;
+        color: #92400e;
+      }
+
+      .condition-fair {
+        background-color: #fee2e2;
+        color: #991b1b;
+      }
+
+      .rating {
+        color: #f8d64e;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+      }
+
+      .product-meta {
+        font-size: 0.85rem;
+        color: #6c757d;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow-lg fixed-top p-2">
+      <div class="container">
+        <a class="navbar-brand fw-bold fs-3" href="index.html">Thrift Store</a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="shop.html">Shop</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cart.html"
+                ><img src="img/cart1.svg" class="cart" alt=""
+              /></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login_signup.html"
+                ><img src="img/acc.svg" class="cart" alt=""
+              /></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <h2 id="welcome" class="welcome-text"></h2>
+
+    <!-- Shop Header -->
+    <header class="shop-header">
+      <div class="container">
+        <h1 class="display-4 fw-bold mb-3">Thrift Store</h1>
+        <p class="lead mb-4">
+          Discover unique vintage finds and pre-loved fashion at sustainable
+          prices
+        </p>
+        <div class="col-lg-6 mx-auto">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              placeholder="Search for vintage dresses, jackets, accessories..."
+            />
+            <button class="btn btn-primary" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+          <div class="d-flex flex-wrap justify-content-center gap-2">
+            <a href="#" class="btn btn-sm btn-outline-light">Tops</a>
+            <a href="#" class="btn btn-sm btn-outline-light">Dresses</a>
+            <a href="#" class="btn btn-sm btn-outline-light">Jackets</a>
+            <a href="#" class="btn btn-sm btn-outline-light">Jeans</a>
+            <a href="#" class="btn btn-sm btn-outline-light">Shoes</a>
+            <a href="#" class="btn btn-sm btn-outline-light">Accessories</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mb-5">
+      <!-- Filter/Sort Section -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="filter-section">
+            <h5 class="fw-bold mb-3">Filter Products</h5>
+
+            <h6 class="mt-4 mb-2 fw-bold">Categories</h6>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="category1"
+                checked
+              />
+              <label class="form-check-label" for="category1">Tops</label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="category2"
+                checked
+              />
+              <label class="form-check-label" for="category2">Dresses</label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="category3"
+                checked
+              />
+              <label class="form-check-label" for="category3">Jackets</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="category4" />
+              <label class="form-check-label" for="category4">Pants</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="category5" />
+              <label class="form-check-label" for="category5">Shoes</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="category6" />
+              <label class="form-check-label" for="category6"
+                >Accessories</label
+              >
+            </div>
+
+            <h6 class="mt-4 mb-2 fw-bold">Condition</h6>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="condition1"
+                checked
+              />
+              <label class="form-check-label" for="condition1">Like New</label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="condition2"
+                checked
+              />
+              <label class="form-check-label" for="condition2">Good</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="condition3" />
+              <label class="form-check-label" for="condition3">Fair</label>
+            </div>
+
+            <h6 class="mt-4 mb-2 fw-bold">Price Range</h6>
+            <input
+              type="range"
+              class="form-range"
+              min="0"
+              max="200"
+              step="5"
+              id="priceRange"
+            />
+            <div class="d-flex justify-content-between">
+              <span>$0</span>
+              <span>$200+</span>
+            </div>
+
+            <button class="btn btn-primary w-100 mt-3">Apply Filters</button>
+          </div>
+        </div>
+
+        <div class="col-md-9">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+              <span class="text-muted">Showing 1-12 of 86 products</span>
+            </div>
+            <div>
+              <select class="form-select form-select-sm" style="width: auto">
+                <option selected>Sort by: Featured</option>
+                <option>Price: Low to High</option>
+                <option>Price: High to Low</option>
+                <option>Newest Arrivals</option>
+                <option>Best Rated</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Product Grid -->
+          <div class="row g-4">
+            <!-- Product 1 -->
+            <div class="col-md-6 col-lg-4">
+              <div
+                class="product-card"
+                data-id="1"
+                data-name="Vintage Denim Jacket"
+                data-price="49.99"
+                data-original-price="65.00"
+                data-image="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                data-description="Authentic 1990s Levi's jacket in excellent condition. Classic trucker style with minimal wear."
+                data-condition="excellent"
+                data-brand="Levi's"
+                data-era="1990s"
+                data-size="M"
+                data-rating="4.5"
+                data-review-count="12"
+              >
+                <span class="badge-sale">SALE</span>
+                <span class="badge-vintage">VINTAGE</span>
+                <img
+                  src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                  class="product-img w-100"
+                  alt="Vintage Denim Jacket"
+                />
+                <div class="p-3">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span class="text-muted ms-1">(12)</span>
+                  </div>
+                  <h5 class="mb-1">Vintage Denim Jacket</h5>
+                  <span class="condition-tag condition-excellent"
+                    >Excellent Condition</span
+                  >
+                  <div class="product-meta mt-1">
+                    <span>Levi's • 1990s • Size M</span>
+                  </div>
+                  <div class="mt-2">
+                    <span class="original-price">$65.00</span>
+                    <span class="sale-price ms-2 fw-bold">$49.99</span>
+                  </div>
+                  <div class="d-flex gap-2 mt-3">
+                    <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
+                    <button class="btn btn-quick-view view-detail-btn">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="col-md-6 col-lg-4">
+              <div
+                class="product-card"
+                data-id="2"
+                data-name="Retro Floral Dress"
+                data-price="39.99"
+                data-image="https://images.unsplash.com/photo-1543076447-215ad9ba6923?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
+                data-description="Vintage 1980s floral dress in good condition with classic retro pattern."
+                data-condition="good"
+                data-brand="Unknown"
+                data-era="1980s"
+                data-size="S"
+                data-rating="4"
+                data-review-count="8"
+              >
+                <span class="badge-vintage">VINTAGE</span>
+                <img
+                  src="https://images.unsplash.com/photo-1543076447-215ad9ba6923?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
+                  class="product-img w-100"
+                  alt="Retro Floral Dress"
+                />
+                <div class="p-3">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span class="text-muted ms-1">(8)</span>
+                  </div>
+                  <h5 class="mb-1">Retro Floral Dress</h5>
+                  <span class="condition-tag condition-good"
+                    >Good Condition</span
+                  >
+                  <div class="product-meta mt-1">
+                    <span>Unknown Brand • 1980s • Size S</span>
+                  </div>
+                  <div class="mt-2">
+                    <span class="price">$39.99</span>
+                  </div>
+                  <div class="d-flex gap-2 mt-3">
+                    <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
+                    <button class="btn btn-quick-view view-detail-btn">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="product-card">
+                <span class="badge-sale">SALE</span>
+                <img
+                  src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80"
+                  class="product-img w-100"
+                  alt="Leather Crossbody Bag"
+                />
+                <div class="p-3">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span class="text-muted ms-1">(24)</span>
+                  </div>
+                  <h5 class="mb-1">Leather Crossbody Bag</h5>
+                  <span class="condition-tag condition-excellent"
+                    >Excellent Condition</span
+                  >
+                  <div class="product-meta mt-1">
+                    <span>Coach • 2005 • One Size</span>
+                  </div>
+                  <div class="mt-2">
+                    <span class="original-price">$120.00</span>
+                    <span class="sale-price ms-2 fw-bold">$89.99</span>
+                  </div>
+                  <div class="d-flex gap-2 mt-3">
+                    <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
+                    <button class="btn btn-quick-view">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="product-card">
+                <img
+                  src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=736&q=80"
+                  class="product-img w-100"
+                  alt="Classic White Sneakers"
+                />
+                <div class="p-3">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span class="text-muted ms-1">(15)</span>
+                  </div>
+                  <h5 class="mb-1">Classic White Sneakers</h5>
+                  <span class="condition-tag condition-good"
+                    >Good Condition</span
+                  >
+                  <div class="product-meta mt-1">
+                    <span>Adidas • 2018 • Size 9</span>
+                  </div>
+                  <div class="mt-2">
+                    <span class="price">$54.99</span>
+                  </div>
+                  <div class="d-flex gap-2 mt-3">
+                    <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
+                    <button class="btn btn-quick-view">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="product-card">
+                <span class="badge-vintage">VINTAGE</span>
+                <img
+                  src="https://images.unsplash.com/photo-1539533018447-63fcce2678e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                  class="product-img w-100"
+                  alt="Silk Blouse"
+                />
+                <div class="p-3">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span class="text-muted ms-1">(6)</span>
+                  </div>
+                  <h5 class="mb-1">Silk Blouse</h5>
+                  <span class="condition-tag condition-fair"
+                    >Fair Condition</span
+                  >
+                  <div class="product-meta mt-1">
+                    <span>Unknown Brand • 1970s • Size S</span>
+                  </div>
+                  <div class="mt-2">
+                    <span class="price">$34.99</span>
+                  </div>
+                  <div class="d-flex gap-2 mt-3">
+                    <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
+                    <button class="btn btn-quick-view">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="product-card">
+                <span class="badge-sale">SALE</span>
+                <img
+                  src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1072&q=80"
+                  class="product-img w-100"
+                  alt="High-Waisted Jeans"
+                />
+                <div class="p-3">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span class="text-muted ms-1">(18)</span>
+                  </div>
+                  <h5 class="mb-1">High-Waisted Jeans</h5>
+                  <span class="condition-tag condition-excellent"
+                    >Excellent Condition</span
+                  >
+                  <div class="product-meta mt-1">
+                    <span>Guess • 2015 • Size 27</span>
+                  </div>
+                  <div class="mt-2">
+                    <span class="original-price">$75.00</span>
+                    <span class="sale-price ms-2 fw-bold">$59.99</span>
+                  </div>
+                  <div class="d-flex gap-2 mt-3">
+                    <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
+                    <button class="btn btn-quick-view">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pagination -->
+          <nav aria-label="Page navigation" class="mt-5">
+            <ul class="pagination justify-content-center">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                  >Previous</a
+                >
+              </li>
+              <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </main>
+
+    <!-- Newsletter Section -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <h3 class="fw-bold mb-3">Join Our Thrift Community</h3>
+            <p class="lead mb-4">
+              Get exclusive access to new arrivals, special discounts, and
+              sustainable fashion tips.
+            </p>
+            <div
+              class="input-group mb-3"
+              style="max-width: 500px; margin: 0 auto"
+            >
+              <input
+                type="email"
+                class="form-control form-control-lg"
+                placeholder="Your email address"
+              />
+              <button class="btn btn-primary btn-lg" type="button">
+                Subscribe
+              </button>
+            </div>
+            <small class="text-muted"
+              >We respect your privacy. Unsubscribe at any time.</small
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center text-muted py-4 border-top fw-bold">
+      &copy; 2025 Thrift Store. All rights reserved.
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Simple product card interaction
+      document.querySelectorAll(".product-card").forEach((card) => {
+        card.addEventListener("mouseenter", function () {
+          this.querySelector(".btn-add-to-cart").style.opacity = "1";
+          this.querySelector(".btn-quick-view").style.opacity = "1";
+        });
+
+        card.addEventListener("mouseleave", function () {
+          this.querySelector(".btn-add-to-cart").style.opacity = "0.9";
+          this.querySelector(".btn-quick-view").style.opacity = "0.9";
+        });
+      });
+
+      // Quick view button functionality
+      // document.querySelectorAll('.btn-quick-view').forEach(btn => {
+      //     btn.addEventListener('click', function(e) {
+      //         e.preventDefault();
+      //         // In a real implementation, this would open a modal with product details
+      //         alert('Quick view feature would show more product details here!');
+      //     });
+      // });
+
+      document.querySelectorAll(".view-detail-btn").forEach((button) => {
+        button.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const productCard = this.closest(".product-card");
+
+          // Get all product data from data attributes
+          const productData = {
+            id: productCard.dataset.id,
+            name: productCard.dataset.name,
+            price: productCard.dataset.price,
+            originalPrice:
+              productCard.dataset.originalPrice || productCard.dataset.price,
+            image: productCard.dataset.image,
+            description: productCard.dataset.description,
+            condition: productCard.dataset.condition,
+            brand: productCard.dataset.brand,
+            era: productCard.dataset.era,
+            size: productCard.dataset.size,
+            rating: productCard.dataset.rating,
+            reviewCount: productCard.dataset.reviewCount,
+            badges: {
+              sale: productCard.querySelector(".badge-sale") ? true : false,
+              vintage: productCard.querySelector(".badge-vintage")
+                ? true
+                : false,
+            },
+          };
+
+          // Store product data temporarily
+          sessionStorage.setItem("currentProduct", JSON.stringify(productData));
+
+          // Redirect to product detail page
+          window.location.href = "product-detail.html";
+        });
+      });
+
+      // Make entire product card clickable if desired
+      document.querySelectorAll(".product-card").forEach((card) => {
+        card.addEventListener("click", function (e) {
+          if (
+            !e.target.closest(".btn-add-to-cart") &&
+            !e.target.closest(".view-detail-btn")
+          ) {
+            const viewBtn = this.querySelector(".view-detail-btn");
+            viewBtn.click();
+          }
+        });
+      });
+
+      const username = localStorage.getItem("username");
+      const welcome = document.getElementById('welcome');
+      if (username){
+        welcome.textContent = 'WELLCOME ${username}!';
+      }
+      else{
+        welcome.textContent = 'WELCOME To The SHOP';
+      }
+
+    </script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

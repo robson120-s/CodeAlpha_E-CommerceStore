@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | Thrift Store</title>
+    <!-- Add your CSS styles here -->
+    <style>
+        /* Your existing product detail styles */
+    </style>
+</head>
+<body>
+    <div class="product-container" id="productContainer">
+        <!-- Content will be populated by JavaScript -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const productData = JSON.parse(sessionStorage.getItem('currentProduct'));
+            const container = document.getElementById('productContainer');
+            
+            if (productData) {
+            
+                // Generate stars based on rating
+                const stars = [];
+                const fullStars = Math.floor(productData.rating);
+                const hasHalfStar = productData.rating % 1 >= 0.5;
+                
+                for (let i = 0; i < 5; i++) {
+                    if (i < fullStars) {
+                        stars.push('<i class="fas fa-star"></i>');
+                    } else if (i === fullStars && hasHalfStar) {
+                        stars.push('<i class="fas fa-star-half-alt"></i>');
+                    } else {
+                        stars.push('<i class="far fa-star"></i>');
+                    }
+                }
+                
+                container.innerHTML = `
+                    <div class="product-gallery">
+                        <div class="thumbnail-container">
+                            <img src="${productData.image}" class="thumbnail active" alt="${productData.name}">
+                        </div>
+                        <img src="${productData.image}" class="main-image" alt="${productData.name}">
+                    </div>
+
+                    <div class="product-info">
+                        ${productData.badges.sale ? '<span class="badge-sale">SALE</span>' : ''}
+                        ${productData.badges.vintage ? '<span class="badge-vintage">VINTAGE</span>' : ''}
+                        <span class="condition-tag condition-${productData.condition}">${productData.condition.charAt(0).toUpperCase() + productData.condition.slice(1)} Condition</span>
+                        
+                        <h1 class="product-title">${productData.name}</h1>
+                        
+                        <div class="rating">
+                            ${stars.join('')}
+                            <span class="text-muted ms-1">(${productData.reviewCount})</span>
+                        </div>
+                        
+                        <div class="product-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Brand:</span>
+                                <span>${productData.brand}</span>
+                            </div>
+                            ${productData.era ? `
+                            <div class="meta-item">
+                                <span class="meta-label">Era:</span>
+                                <span>${productData.era}</span>
+                            </div>` : ''}
+                            ${productData.size ? `
+                            <div class="meta-item">
+                                <span class="meta-label">Size:</span>
+                                <span>${productData.size}</span>
+                            </div>` : ''}
+                        </div>
+
+                        <div class="product-price">
+                            ${productData.originalPrice !== productData.price ? 
+                              `<span class="original-price">$${productData.originalPrice}</span>` : ''}
+                            <span class="sale-price">$${productData.price}</span>
+                        </div>
+
+                        <div class="product-description">
+                            <h3>Description</h3>
+                            <p>${productData.description}</p>
+                        </div>
+
+                        <div class="d-flex gap-2 mt-3">
+                            <button class="btn btn-add-to-cart flex-grow-1">
+                                <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                            </button>
+                            <button class="btn btn-wishlist">
+                                <i class="fas fa-heart"></i> Save
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // No product data found, redirect back to shop
+                window.location.href = 'shop.html';
+            }
+        });
+        
+    </script>
+</body>
+</html>
