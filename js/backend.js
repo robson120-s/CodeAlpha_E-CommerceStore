@@ -48,26 +48,26 @@
     });
 
     //LOGIN 
-    router.post('/login', (req, res) => {
-        const {email, passwrd} = req.body;
-        const sql =' SELECT * FROM users WHERE email = ?';
+    // router.post('/login', (req, res) => {
+    //     const {email, passwrd} = req.body;
+    //     const sql =' SELECT * FROM users WHERE email = ?';
 
-        db.query(sql, [email], (err, results) => {
-            if (err) return res.status(500).json({ message :'user not found'});
+    //     db.query(sql, [email], (err, results) => {
+    //         if (err) return res.status(500).json({ message :'user not found'});
 
-            const user = results[0];
-            const isMatch = bycript.compareSync(passwrd, user.hash_pass);
-            if (!isMatch)
-                return res.status(401).json({message: 'Incorrect PassWord'});
+    //         const user = results[0];
+    //         const isMatch = bycript.compareSync(passwrd, user.hash_pass);
+    //         if (!isMatch)
+    //             return res.status(401).json({message: 'Incorrect PassWord'});
 
-            const token = jwt.sign({
-                id: user.id,
-                name: user.full_name
-            }, secret, {expiresIn: '1h'});
-            res.json({message: 'Login Successful', token});
-        })
+    //         const token = jwt.sign({
+    //             id: user.id,
+    //             name: user.full_name
+    //         }, secret, {expiresIn: '1h'});
+    //         res.json({message: 'Login Successful', token});
+    //     })
 
-    })
+    // })
 
     module.exports = router;
 

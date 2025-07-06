@@ -28,10 +28,10 @@
                 ><img src="img/cart1.svg" class="cart" alt=""
               /></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="login_signup.html"
+            <li class="nav-item" id="account-area">
+              <!-- <a class="nav-link" href="login_signup.html"
                 ><img src="img/acc.svg" class="cart" alt=""
-              /></a>
+              /></a> -->
             </li>
           </ul>
         </div>
@@ -45,7 +45,7 @@
         <p class="lead text">
           Discover trending fashion and gadgets now!
         </p>
-        <a href="product.html" class="btn btn-light btn-lg mt-3 rounded-5">Shop Now</a>
+        <a href="shop.html" class="btn btn-light btn-lg mt-3 rounded-5">Shop Now</a>
       </div>
     </div>
 
@@ -55,7 +55,7 @@
       <div class="row g-2">
         <!-- Product Card -->
         
-        <div class="col-md-3">
+        <div class="col-md-3 product-card">
           <div class="card h-100 shadow-sm">
             <img src="img/jacket1.jpg" class="card-img-top" alt="Product" />
             <div class="card-body d-flex flex-column">
@@ -65,6 +65,9 @@
                 class="mt-auto d-flex justify-content-between align-items-center"
               >
                 <span class="fw-bold">$49.99</span>
+                  <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
                 <a href="#" class="btn btn-sm btn-outline-dark" >Buy</a>
               </div>
             </div>
@@ -72,7 +75,7 @@
         </div>
 
         <!-- Another Product -->
-        <div class="col-md-3">
+        <div class="col-md-3 product-card">
           <div class="card h-100 shadow-sm">
             <img src="img/sneakers.jpg" class="card-img-top" alt="Product" />
             <div class="card-body d-flex flex-column">
@@ -82,13 +85,17 @@
                 class="mt-auto d-flex justify-content-between align-items-center"
               >
                 <span class="fw-bold">$79.99</span>
+                  <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
                 <a href="#" class="btn btn-sm btn-outline-dark">Buy</a>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-md-3"> 
+
+        <div class="col-md-3 product-card"> 
   <div class="card h-100 shadow-sm">
     <img src="img/sunglass.jpg" class="card-img-top" alt="Sunglasses" />
     <div class="card-body d-flex flex-column">
@@ -98,6 +105,9 @@
       </p>
       <div class="mt-auto d-flex justify-content-between align-items-center">
         <span class="fw-bold">$29.99</span>
+          <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
         <a href="#" class="btn btn-sm btn-outline-dark">Buy</a>
       </div>
     </div>
@@ -105,7 +115,7 @@
 </div>
 
 
-        <div class="col-md-3"> 
+        <div class="col-md-3 product-card"> 
   <div class="card h-100 shadow-sm">
     <img src="img/backpack.jpg" class="card-img-top" alt="Backpack" />
     <div class="card-body d-flex flex-column">
@@ -115,16 +125,209 @@
       </p>
       <div class="mt-auto d-flex justify-content-between align-items-center">
         <span class="fw-bold">$45.50</span>
-        <a href="#" class="btn btn-sm btn-outline-dark">Buy</a>
+          <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
+        <a href="#" class="btn btn-sm btn-outline-dark btn-quick-view view-detail-btn">Buy</a>
       </div>
     </div>
   </div>
 </div>
 
+<div class="row g-4">
+            <!-- Product 1 -->
+            <div class="col-md-6 col-lg-4">
+              <div
+                class="product-card"
+                data-id="1"
+                data-name="Vintage Denim Jacket"
+                data-price="49.99"
+                data-original-price="65.00"
+                data-image="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                data-description="Authentic 1990s Levi's jacket in excellent condition. Classic trucker style with minimal wear."
+                data-condition="excellent"
+                data-brand="Levi's"
+                data-era="1990s"
+                data-size="M"
+                data-rating="4.5"
+                data-review-count="12"
+              >
+                <span class="badge-sale">SALE</span>
+                <span class="badge-vintage">VINTAGE</span>
+                <img
+                  src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                  class="product-img w-100"
+                  alt="Vintage Denim Jacket"
+                />
+                <div class="p-3">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span class="text-muted ms-1">(12)</span>
+                  </div>
+                  <h5 class="mb-1">Vintage Denim Jacket</h5>
+                  <span class="condition-tag condition-excellent"
+                    >Excellent Condition</span
+                  >
+                  <div class="product-meta mt-1">
+                    <span>Levi's • 1990s • Size M</span>
+                  </div>
+                  <div class="mt-2">
+                    <span class="original-price">$65.00</span>
+                    <span class="sale-price ms-2 fw-bold">$49.99</span>
+                  </div>
+                  <div class="d-flex gap-2 mt-3">
+                    <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
+                    <button class="btn btn-quick-view view-detail-btn">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="col-md-6 col-lg-4">
+              <div
+                class="product-card"
+                data-id="2"
+                data-name="Retro Floral Dress"
+                data-price="39.99"
+                data-image="https://images.unsplash.com/photo-1543076447-215ad9ba6923?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
+                data-description="Vintage 1980s floral dress in good condition with classic retro pattern."
+                data-condition="good"
+                data-brand="Unknown"
+                data-era="1980s"
+                data-size="S"
+                data-rating="4"
+                data-review-count="8"
+              >
+                <span class="badge-vintage">VINTAGE</span>
+                <img
+                  src="https://images.unsplash.com/photo-1543076447-215ad9ba6923?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
+                  class="product-img w-100"
+                  alt="Retro Floral Dress"
+                />
+                <div class="p-3">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span class="text-muted ms-1">(8)</span>
+                  </div>
+                  <h5 class="mb-1">Retro Floral Dress</h5>
+                  <span class="condition-tag condition-good"
+                    >Good Condition</span
+                  >
+                  <div class="product-meta mt-1">
+                    <span>Unknown Brand • 1980s • Size S</span>
+                  </div>
+                  <div class="mt-2">
+                    <span class="price">$39.99</span>
+                  </div>
+                  <div class="d-flex gap-2 mt-3">
+                    <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
+                    <button class="btn btn-quick-view view-detail-btn">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="product-card">
+                <span class="badge-sale">SALE</span>
+                <img
+                  src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80"
+                  class="product-img w-100"
+                  alt="Leather Crossbody Bag"
+                />
+                <div class="p-3">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span class="text-muted ms-1">(24)</span>
+                  </div>
+                  <h5 class="mb-1">Leather Crossbody Bag</h5>
+                  <span class="condition-tag condition-excellent"
+                    >Excellent Condition</span
+                  >
+                  <div class="product-meta mt-1">
+                    <span>Coach • 2005 • One Size</span>
+                  </div>
+                  <div class="mt-2">
+                    <span class="original-price">$120.00</span>
+                    <span class="sale-price ms-2 fw-bold">$89.99</span>
+                  </div>
+                  <div class="d-flex gap-2 mt-3">
+                    <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
+                    <button class="btn btn-quick-view">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="product-card">
+                <img
+                  src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=736&q=80"
+                  class="product-img w-100"
+                  alt="Classic White Sneakers"
+                />
+                <div class="p-3">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span class="text-muted ms-1">(15)</span>
+                  </div>
+                  <h5 class="mb-1">Classic White Sneakers</h5>
+                  <span class="condition-tag condition-good"
+                    >Good Condition</span
+                  >
+                  <div class="product-meta mt-1">
+                    <span>Adidas • 2018 • Size 9</span>
+                  </div>
+                  <div class="mt-2">
+                    <span class="price">$54.99</span>
+                  </div>
+                  <div class="d-flex gap-2 mt-3">
+                    <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
+                    <button class="btn btn-quick-view">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
 
-        <div class="col-md-3">
+
+        <div class="col-md-3 product-card">
           <div class="card h-100 shadow-sm">
             <img src="img/tshirt.jpg" class="card-img-top" alt="Product" />
             <div class="card-body d-flex flex-column">
@@ -136,13 +339,16 @@
                 class="mt-auto d-flex justify-content-between align-items-center"
               >
                 <span class="fw-bold">$79.99</span>
+                <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
                 <a href="#" class="btn btn-sm btn-outline-dark">Buy</a>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-3 product-card">
           <div class="card h-100 shadow-sm">
             <img src="img/croptop.jpg" class="card-img-top" alt="Product" />
             <div class="card-body d-flex flex-column">
@@ -154,13 +360,16 @@
                 class="mt-auto d-flex justify-content-between align-items-center"
               >
                 <span class="fw-bold">$79.99</span>
+                <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
                 <a href="#" class="btn btn-sm btn-outline-dark">Buy</a>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-3 product-card">
           <div class="card h-100 shadow-sm">
             <img src="img/lowheel.jpg" class="card-img-top" alt="Product" />
             <div class="card-body d-flex flex-column">
@@ -172,13 +381,16 @@
                 class="mt-auto d-flex justify-content-between align-items-center"
               >
                 <span class="fw-bold">$79.99</span>
+                <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
                 <a href="#" class="btn btn-sm btn-outline-dark">Buy</a>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-3 product-card">
           <div class="card h-100 shadow-sm">
             <img src="img/dress.jpg" class="card-img-top" alt="Product" />
             <div class="card-body d-flex flex-column">
@@ -190,6 +402,9 @@
                 class="mt-auto d-flex justify-content-between align-items-center"
               >
                 <span class="fw-bold">$79.99</span>
+                <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
                 <a href="#" class="btn btn-sm btn-outline-dark">Buy</a>
               </div>
             </div>
@@ -197,7 +412,7 @@
         </div>
 
 
-        <div class="col-md-3"> 
+        <div class="col-md-3 product-card"> 
   <div class="card h-100 shadow-sm">
     <img src="img/smartwatch.webp" class="card-img-top" alt="Smart Watch" />
     <div class="card-body d-flex flex-column">
@@ -207,13 +422,16 @@
       </p>
       <div class="mt-auto d-flex justify-content-between align-items-center">
         <span class="fw-bold">$149.99</span>
+        <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
         <a href="#" class="btn btn-sm btn-outline-dark">Buy</a>
       </div>
     </div>
   </div>
 </div>
 
-<div class="col-md-3"> 
+<div class="col-md-3 product-card"> 
   <div class="card h-100 shadow-sm">
     <img src="img/skincare.webp" class="card-img-top" alt="Skincare Set" />
     <div class="card-body d-flex flex-column">
@@ -223,6 +441,9 @@
       </p>
       <div class="mt-auto d-flex justify-content-between align-items-center">
         <span class="fw-bold">$39.95</span>
+        <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
         <a href="#" class="btn btn-sm btn-outline-dark">Buy</a>
       </div>
     </div>
@@ -230,7 +451,7 @@
 </div>
 
 
-<div class="col-md-3"> 
+<div class="col-md-3 product-card"> 
   <div class="card h-100 shadow-sm">
     <img src="img/handbag.jpg" class="card-img-top" alt="Handbag" />
     <div class="card-body d-flex flex-column">
@@ -240,13 +461,16 @@
       </p>
       <div class="mt-auto d-flex justify-content-between align-items-center">
         <span class="fw-bold">$89.00</span>
+        <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
         <a href="#" class="btn btn-sm btn-outline-dark">Buy</a>
       </div>
     </div>
   </div>
 </div>
 
-<div class="col-md-3"> 
+<div class="col-md-3 product-card"> 
   <div class="card h-100 shadow-sm">
     <img src="img/headphones.webp" class="card-img-top" alt="Headphones" />
     <div class="card-body d-flex flex-column">
@@ -256,13 +480,16 @@
       </p>
       <div class="mt-auto d-flex justify-content-between align-items-center">
         <span class="fw-bold">$119.99</span>
+        <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
         <a href="#" class="btn btn-sm btn-outline-dark">Buy</a>
       </div>
     </div>
   </div>
 </div>
 
-<div class="col-md-3"> 
+<div class="col-md-3 product-card"> 
   <div class="card h-100 shadow-sm">
     <img src="img/maxidress.avif" class="card-img-top" alt="Maxi Dress" />
     <div class="card-body d-flex flex-column">
@@ -272,6 +499,9 @@
       </p>
       <div class="mt-auto d-flex justify-content-between align-items-center">
         <span class="fw-bold">$65.00</span>
+        <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
         <a href="#" class="btn btn-sm btn-outline-dark">Buy</a>
       </div>
     </div>
@@ -279,7 +509,7 @@
 </div>
 
 
-<div class="col-md-3"> 
+<div class="col-md-3  product-card"> 
   <div class="card h-100 shadow-sm">
     <img src="img/denimjacket.jpg" class="card-img-top" alt="Denim Jacket" />
     <div class="card-body d-flex flex-column">
@@ -289,6 +519,9 @@
       </p>
       <div class="mt-auto d-flex justify-content-between align-items-center">
         <span class="fw-bold">$74.99</span>
+        <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
         <a href="#" class="btn btn-sm btn-outline-dark">Buy</a>
       </div>
     </div>
@@ -298,7 +531,7 @@
 
 
 
-        <div class="col-md-3"> 
+        <div class="col-md-3 product-card"> 
   <div class="card h-100 shadow-sm">
     <img src="img/lipstick.jpg" class="card-img-top" alt="Lipstick" />
     <div class="card-body d-flex flex-column">
@@ -308,12 +541,15 @@
       </p>
       <div class="mt-auto d-flex justify-content-between align-items-center">
         <span class="fw-bold">$19.90</span>
+        <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
         <a href="#" class="btn btn-sm btn-outline-dark">Buy</a>
       </div>
     </div>
   </div>
 </div>
-<div class="col-md-3"> 
+<div class="col-md-3  product-card"> 
   <div class="card h-100 shadow-sm">
     <img src="img/menshorts.jpg" class="card-img-top" alt="Men's Shorts" />
     <div class="card-body d-flex flex-column">
@@ -323,6 +559,9 @@
       </p>
       <div class="mt-auto d-flex justify-content-between align-items-center">
         <span class="fw-bold">$32.49</span>
+        <button class="btn btn-add-to-cart flex-grow-1">
+                      <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </button>
         <a href="#" class="btn btn-sm btn-outline-dark">Buy</a>
       </div>
     </div>

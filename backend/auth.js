@@ -45,7 +45,8 @@ router.post('/signin', (req, res) => {
 // Login Route
 router.post('/login', (req, res) => {
 
-    console.log("BODY RECEIVED:", req.body);
+    console.log('Login request:', req.body);
+
   const { email, password } = req.body;
 
   const sql = 'SELECT * FROM users WHERE email = ?';
@@ -54,11 +55,14 @@ router.post('/login', (req, res) => {
     if (results.length === 0) return res.status(404).json({ message: 'User not found' });
 
     const user = results[0];
+
     const isMatch = bcrypt.compareSync(password, user.password_hash);
+
     if (!isMatch) return res.status(401).json({ message: 'Incorrect password' });
 
     const token = jwt.sign({ id: user.id, name: user.full_name }, secret, { expiresIn: '1h' });
     res.json({ message: 'Login successful', token });
+    res.json({message: 'Login Successfull', token , name : user.full_name})
   });
 });
 

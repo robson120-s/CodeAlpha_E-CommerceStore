@@ -67,3 +67,183 @@ body{
       background: rgba(0, 0, 0, 0.5);
       z-index: 900;
     }
+
+       /*           SHOP         */
+       :root {
+        --primary-color: #6c4ab6;
+        --secondary-color: #8d72e1;
+        --accent-color: #b9e0ff;
+        --light-color: #f8f9fa;
+        --dark-color: #212529;
+        --sale-color: #ff6b6b;
+      }
+
+      body {
+        background-color: #d5bd8e;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .shop-header {
+        background: linear-gradient rgba(0, 0, 0, 0.5),
+          url("https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80")
+            center/cover;
+        color: white;
+        padding: 5rem 0;
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+
+      .product-card {
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        margin-bottom: 1.5rem;
+        position: relative;
+        background-color: #ffffff;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-img {
+        height: 250px;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .product-card:hover .product-img {
+        transform: scale(1.03);
+      }
+
+      .badge-sale {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: var(--sale-color);
+        font-size: 0.8rem;
+        padding: 5px 10px;
+      }
+
+      .badge-vintage {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: var(--primary-color);
+        font-size: 0.8rem;
+        padding: 5px 10px;
+      }
+
+      .price {
+        font-weight: 700;
+        color: var(--dark-color);
+      }
+
+      .original-price {
+        text-decoration: line-through;
+        color: #6c757d;
+        font-size: 0.9rem;
+      }
+
+      .sale-price {
+        color: var(--sale-color);
+      }
+
+      .btn-add-to-cart {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-add-to-cart:hover {
+        background-color: var(--secondary-color);
+        transform: translateY(-2px);
+      }
+
+      .btn-quick-view {
+        background-color: white;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        padding: 8px 20px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-quick-view:hover {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .filter-section {
+        background-color: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+      }
+
+      .form-check-input:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+
+      .pagination .page-item.active .page-link {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+
+      .pagination .page-link {
+        color: var(--primary-color);
+      }
+
+      .category-badge {
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: var(--accent-color);
+        color: var(--primary-color);
+        border-radius: 20px;
+        font-size: 0.75rem;
+        margin-right: 5px;
+        margin-bottom: 5px;
+      }
+
+      .condition-tag {
+        font-size: 0.8rem;
+        padding: 3px 8px;
+        border-radius: 5px;
+        background-color: #e9ecef;
+        display: inline-block;
+        margin-top: 5px;
+      }
+
+      .condition-excellent {
+        background-color: #d1fae5;
+        color: #065f46;
+      }
+
+      .condition-good {
+        background-color: #fef3c7;
+        color: #92400e;
+      }
+
+      .condition-fair {
+        background-color: #fee2e2;
+        color: #991b1b;
+      }
+
+      .rating {
+        color: #f8d64e;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+      }
+
+      .product-meta {
+        font-size: 0.85rem;
+        color: #6c757d;
+      }

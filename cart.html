@@ -56,10 +56,10 @@
                 ><img src="img/cart1.svg" class="cart" alt=""
               /></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="login_signup.html"
+            <li class="nav-item" id="account-area">
+              <!-- <a class="nav-link" href="login_signup.html"
                 ><img src="img/acc.svg" class="cart" alt=""
-              /></a>
+              /></a> -->
             </li>
           </ul>
         </div>
@@ -69,6 +69,7 @@
         <h1>Your Shopping Cart</h1>
         <div id="cart-items"></div>
         <div id="cart-total">
+
             <h3>Total: $<span id="total-amount">0.00</span></h3>
             <button class="checkout-btn" onclick="goToCheckout()">Go to Checkout</button>
         </div>
@@ -161,5 +162,47 @@
         // }
     </script>
     <script src="js/cart.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    alert('You must be logged in to view your cart.');
+    window.location.href = 'login_signup.html';
+    return;
+  }
+
+  fetch('http://localhost:3001/cart', {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    const cartDiv = document.getElementById('cart-items');
+
+    if (!Array.isArray(data) || data.length === 0) {
+      cartDiv.innerHTML = '<p>Your cart is empty.</p>';
+      return;
+    }
+
+    data.forEach(item => {
+      const itemDiv = document.createElement('div');
+      itemDiv.innerHTML = `
+        <h4>${item.name}</h4>
+        <p>Price: $${item.price}</p>
+        <p>Quantity: ${item.quantity}</p>
+        <hr />
+      `;
+      cartDiv.appendChild(itemDiv);
+    });
+  })
+  .catch(err => {
+    console.error('Cart Fetch Error:', err);
+    alert('Failed to load cart');
+  });
+});
+</script>
+
 </body>
 </html>
